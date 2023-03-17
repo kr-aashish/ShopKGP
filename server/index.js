@@ -21,7 +21,7 @@ const authRouter = require('./routes/authRoutes');
 app.use('/api/auth', authRouter);
 
 const { API_PORT } = process.env;
-const port = API_PORT || 4000;
+const port = API_PORT || 3001;
 
 //check if every single table exists in the database, if it don't, create it!
 db.sequelize.sync().then(() => {
