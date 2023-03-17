@@ -52,7 +52,7 @@ export default function SignInSide() {
 
       console.log("This is the response", email, password);
 
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}login`, {
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, {
         email,
         password,
       });

@@ -20,7 +20,7 @@ const config = {
     },
     logging: false,
     pool: {
-        max: 100,
+        max: 1000,
         min: 0,
         acquire: 30000,
         idle: 10000,

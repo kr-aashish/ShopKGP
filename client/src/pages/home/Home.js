@@ -7,7 +7,7 @@ import { Box } from "@mui/system";
 import PrimarySearchAppBar from "../../components/appbar/Appbar";
 import Footer from "../../components/footer/Footer";
 
-import devConfig from '../../config/dev';
+// import devConfig from '../../config/dev';
 import { useState, useEffect} from 'react';
 import axios from 'axios';
 
@@ -17,12 +17,10 @@ function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const prodApiEndpoint = process.env.REACT_APP_PRODUCT_API_URL;
-
   useEffect(() => {
       const fetchData = async () => {
           try {
-              axios.get(`${process.env.REACT_APP_PRODUCT_API_URL}all`).then((response) => {
+              axios.get(`${process.env.REACT_APP_API_URL}/product/all`).then((response) => {
                   setAllProducts(response.data);
               });
           } catch (err) {

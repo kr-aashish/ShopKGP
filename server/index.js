@@ -12,13 +12,13 @@ const db = require('./models');
 
 //Routers
 const productRouter = require('./routes/productRoutes')
-app.use('/product', productRouter);
+app.use('/api/product', productRouter);
 
 const checkoutRouter = require('./routes/checkoutRoutes');
-app.use('/checkout', checkoutRouter);
+app.use('/api/checkout', checkoutRouter);
 
 const authRouter = require('./routes/authRoutes');
-app.use('/auth', authRouter);
+app.use('/api/auth', authRouter);
 
 const { API_PORT } = process.env;
 const port = API_PORT || 4000;

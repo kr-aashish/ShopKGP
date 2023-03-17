@@ -165,7 +165,7 @@ function SellerInterface() {
 
     // const prodApiEndpoint = devConfig.apiEndpoints.createProduct;
 
-    axios.post(`${process.env.REACT_APP_PRODUCT_API_URL}create`, {
+    axios.post(`${process.env.REACT_APP_API_URL}/product/create`, {
       itemId: "",
       sellerId: "",
       name: title, 

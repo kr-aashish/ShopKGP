@@ -59,7 +59,7 @@ export default function SignUp() {
     const year = data.get("year");
     const roll = data.get("roll");
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}signup`, {
+      const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, {
         password,
         name, 
         email,
