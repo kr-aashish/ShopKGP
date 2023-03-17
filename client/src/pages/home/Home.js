@@ -17,12 +17,12 @@ function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const prodApiEndpoint = devConfig.apiEndpoints.product;
+  const prodApiEndpoint = process.env.REACT_APP_PRODUCT_API_URL;
 
   useEffect(() => {
       const fetchData = async () => {
           try {
-              axios.get(prodApiEndpoint).then((response) => {
+              axios.get(`${process.env.REACT_APP_PRODUCT_API_URL}all`).then((response) => {
                   setAllProducts(response.data);
               });
           } catch (err) {
