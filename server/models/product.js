@@ -35,6 +35,15 @@ module.exports = (sequelize, DataTypes) => {
             },
             onDelete: "CASCADE",
         });
+
+        product.belongsTo(models.stock, {
+            foreignKey: "itemId",
+        })
+
+        product.belongsToMany(models.order, {
+            through: "OrderProduct",
+            foreignKey: "itemId",
+        })
     };
 
     return product;
