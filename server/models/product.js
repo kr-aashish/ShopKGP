@@ -4,12 +4,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.UUID, 
             defaultValue: sequelize.UUIDV4, 
             primaryKey: true,
-        }, 
-        sellerId: {
-            type: DataTypes.UUID, 
-            defaultValue: sequelize.UUIDV4, 
-            allowNull: false,
-        }, 
+        },
         name: {
             type: DataTypes.STRING, 
             allowNull: false,
@@ -31,6 +26,16 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
     });
+
+    product.associate = (models) => {
+        product.belongsTo(models.users, {
+            foreignKey: {
+                name: "sellerId",
+                allowNull: false,
+            },
+            onDelete: "CASCADE",
+        });
+    };
 
     return product;
 }
