@@ -25,7 +25,9 @@ import axios from 'axios';
 import devConfig from '../../config/dev';
 import Swal from 'sweetalert2';
 import AWS from 'aws-sdk';
-
+const { BlobServiceClient } = require("@azure/storage-blob");
+const { InteractiveBrowserCredential } = require('@azure/identity');
+// require('dotenv').config()
 
 const useStyles = makeStyles((theme) => ({
   avatar: {
@@ -104,11 +106,11 @@ function SellerInterface() {
     setCategory(event.target.value);
   };
 
-  const s3 = new AWS.S3({
-    accessKeyId: 'AKIAVO4R5EPKIYI3H7HH',
-    secretAccessKey: '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',
-    region: 'ap-northeast-1'
-  });
+  // const s3 = new AWS.S3({
+  //   accessKeyId: 'AKIAVO4R5EPKIYI3H7HH',
+  //   secretAccessKey: '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',
+  //   region: 'ap-northeast-1'
+  // });
 
   // const handleImageChange = (event) => {
   //   setImage(URL.createObjectURL(event.target.files[0]));
@@ -117,6 +119,70 @@ function SellerInterface() {
 
   const handleImageChange = async (event) => {
     try {
+      // const file = event.target.files[0];
+      // // setImage(URL.createObjectURL(file));
+      // // setImageFile(file);
+      // const fileName = `${Date.now()}-${file.name}`;
+      // const params = {
+      //   Bucket: 'shopkgp-media',
+      //   Key: fileName,
+      //   Body: file,
+      //   ACL: 'public-read',
+      // };
+      // await s3.upload(params).promise();
+      // console.log('File uploaded successfully');
+      //
+      // const imageUrl = `https://shopkgp-media.s3.amazonaws.com/${fileName}`;
+      // setImage(imageUrl);
+
+
+      //AZURE STUFFS
+      // const accountKey = "Eg6RmNgX1E+5oju6VA/+EZTM742KLa4Bvnf0e7tBh+wU/dDpCIO2vOTb4VgQDYZVPcCFEhTXihYL+AStVsqn5w==";
+      // const connectionString = 'DefaultEndpointsProtocol=https;AccountName=shopkgp;AccountKey=Eg6RmNgX1E+5oju6VA/+EZTM742KLa4Bvnf0e7tBh+wU/dDpCIO2vOTb4VgQDYZVPcCFEhTXihYL+AStVsqn5w==;EndpointSuffix=core.windows.net';
+      // const file = event.target.files[0];
+
+      // const blobName = `${Date.now()}-${file.name}`; // TODO NOTE THIS
+      //
+      // const sharedKeyCredential = new StorageSharedKeyCredential(accountName, accountKey);
+      // const blobServiceClient = new BlobServiceClient(`https://${accountName}.blob.core.windows.net`, sharedKeyCredential);
+      // const containerClient = blobServiceClient.getContainerClient(containerName);
+      // const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+      //
+      // const options = { blobHTTPHeaders: { blobContentType: file.type } };
+      // await blockBlobClient.uploadBrowserData(file, options);
+      // const accountName = 'shopkgp';
+
+      // if (!accountName) throw Error('Azure Storage accountName not found');
+      // const blobServiceClient = new BlobServiceClient(
+
+      //     `https://${accountName}.blob.core.windows.net`,
+      //     new InteractiveBrowserCredential()
+      // );
+      // const containerClient = blobServiceClient.getContainerClient(containerName);
+      // await blobClient.uploadFile(URL.createObjectURL(file));
+      // const blobServiceClient = await BlobServiceClient.fromConnectionString(connectionString);
+      // const containerClient = blobServiceClient.getContainerClient(containerName);
+      // const blockBlobClient = containerClient.getBlockBlobClient(blobName);
+      // await blockBlobClient.uploadFile(file);
+
+      //UPDATED IN ENV TODO
+      const accountName = "shopkgp";
+      const sasToken = '?sv=2021-12-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-04-05T15:00:32Z&st=2023-04-05T07:00:32Z&sip=42.105.3.67&spr=https,http&sig=i%2FTygVFbsbbCe2qVk01DiySeJWQtFZ4K2naFIaU6qaM%3D';
+
+      const file = event.target.files[0];
+      console.log(file);
+      const blobName = `${Date.now()}`;
+
+      const containerName = "shopkgp-media";
+      const blobServiceClient = new BlobServiceClient(`https://${accountName}.blob.core.windows.net/${sasToken}`);
+      // const blobServiceClient = new BlobServiceClient(`https://${accountName}.blob.core.windows.net/${process.env.SAS_TOKEN}`);
+      console.log('This is SAS token', process.env.SAS_TOKEN);
+      const containerClient = blobServiceClient.getContainerClient(containerName);
+
+
+      const blobClient = await containerClient.getBlockBlobClient(blobName);
+
+
       let timerInterval;
       Swal.fire({
         title: 'Uploading your media',
@@ -140,22 +206,12 @@ function SellerInterface() {
         }
       })
 
-      const file = event.target.files[0];
-      // setImage(URL.createObjectURL(file));
-      // setImageFile(file);
-      const fileName = `${Date.now()}-${file.name}`;
-      const params = {
-        Bucket: 'shopkgp-media',
-        Key: fileName,
-        Body: file,
-        ACL: 'public-read',
-      };
-      await s3.upload(params).promise();
+      await blobClient.uploadBrowserData(file);
+
       console.log('File uploaded successfully');
+      const imageUrl = `https://${accountName}.blob.core.windows.net/${containerName}/${blobName}`;
 
-      const imageUrl = `https://shopkgp-media.s3.amazonaws.com/${fileName}`;
       setImage(imageUrl);
-
     } catch (error) {
       console.error(error);
     }
