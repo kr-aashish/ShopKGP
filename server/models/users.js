@@ -50,11 +50,6 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'sellerId',
       as: 'productSeller',
     });
-    users.hasOne(models.cart, {
-      foreignKey: 'userId',
-      as: 'userCart',
-    })
-
   }
 
   return users;
