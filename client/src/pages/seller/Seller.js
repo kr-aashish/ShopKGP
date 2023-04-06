@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
 import {
   Avatar,
   Box,
@@ -25,6 +25,7 @@ import axios from 'axios';
 import devConfig from '../../config/dev';
 import Swal from 'sweetalert2';
 import AWS from 'aws-sdk';
+import {UserContext} from "../../user_context/Context";
 const { BlobServiceClient } = require("@azure/storage-blob");
 const { InteractiveBrowserCredential } = require('@azure/identity');
 // require('dotenv').config()
@@ -89,6 +90,8 @@ function SellerInterface() {
   const [image, setImage] = useState("");
   // const [imageFile, setImageFile] = useState("");
   const [category, setCategory] = useState("");
+
+  const { state } = useContext(UserContext);
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -223,7 +226,7 @@ function SellerInterface() {
 
     axios.post(`${process.env.REACT_APP_API_URL}/product/create`, {
       itemId: "",
-      sellerId: "",
+      sellerId: state.data.metadata.userId,
       name: title, 
       description: description,
       price: price, 
@@ -250,11 +253,11 @@ function SellerInterface() {
         });
       })
       .finally (() => {
-        setTitle("");
-        setDescription("");
-        setPrice("");
-        setImage("");
-        setCategory("");
+        // setTitle("");
+        // setDescription("");
+        // setPrice("");
+        // setImage("");
+        // setCategory("");
       })
   };
 
