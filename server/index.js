@@ -20,6 +20,9 @@ app.use('/api/checkout', checkoutRouter);
 const authRouter = require('./routes/authRoutes');
 app.use('/api/auth', authRouter);
 
+const orderRouter = require('./routes/orderRoutes');
+app.use('/api/order', orderRouter);
+
 const { API_PORT } = process.env;
 const port = API_PORT || 3001;
 
