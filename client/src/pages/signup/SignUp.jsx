@@ -68,7 +68,8 @@ export default function SignUp() {
       });
       console.log(res);
       if (res.status === 200) {
-        user_dispatch(LoginSuccess({ token: res.data.token }));
+        // user_dispatch(LoginSuccess({ token: res.data.token }));
+        user_dispatch(LoginSuccess({ token: res.data.token, metadata: res.data }));
       } else {
         user_dispatch(LoginError(null));
       }
