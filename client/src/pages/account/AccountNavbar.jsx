@@ -44,10 +44,10 @@ function AccountNavbar() {
                 </ListItemButton>
                 <ListItemButton selected={selectedIndex === 4} onClick={(e) => handleListItemClick(e, 4)}
                                 style={customStyle}>
-                    <ListItemIcon>
-                        <Settings/>
-                    </ListItemIcon>
-                    <ListItemText primary="Settings"/>
+                    {/*<ListItemIcon>*/}
+                    {/*    <Settings/>*/}
+                    {/*</ListItemIcon>*/}
+                    {/*<ListItemText primary="Settings"/>*/}
                 </ListItemButton>
 
             </List>
