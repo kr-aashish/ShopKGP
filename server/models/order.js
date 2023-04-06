@@ -28,9 +28,13 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'userId',
             onDelete: "SET NULL",
         });
-        order.belongsToMany(models.product, {
-            through: 'OrderProduct',
+        // order.belongsToMany(models.product, {
+        //     through: 'OrderProduct',
+        //     foreignKey: 'orderId',
+        // });
+        order.hasMany(models.product, {
             foreignKey: 'orderId',
+            as: 'products',
         });
     };
 
