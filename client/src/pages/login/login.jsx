@@ -20,7 +20,6 @@ import {
   LoginSuccess,
 } from "../../user_context/Action";
 import Logo from "../../components/Logo";
-import { API_URL } from "../../constants";
 import axios from "axios";
 import { Alert, Snackbar } from "@mui/material";
 
