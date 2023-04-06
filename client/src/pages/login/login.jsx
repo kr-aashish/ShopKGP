@@ -57,10 +57,11 @@ export default function SignInSide() {
         password,
       });
 
+      // console.log("This is the user metadata", res.data);
 
       if (res.status === 200) {
         setOpen(0);
-        user_dispatch(LoginSuccess({ token: res.data.token }));
+        user_dispatch(LoginSuccess({ token: res.data.token, metadata: res.data }));
       } else {
         setOpen(1);
         user_dispatch(LoginError(null));
