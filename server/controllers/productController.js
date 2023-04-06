@@ -38,16 +38,17 @@ const createProduct = async (req, res) => {
         // itemId = itemId.length ? itemId : getRandomUuid();
         // sellerId = sellerId.length ? sellerId : getRandomUuid();
         itemId = itemId && itemId.length ? itemId : getRandomUuid();
-        sellerId = sellerId && sellerId.length ? sellerId : getRandomUuid();
+        // sellerId = sellerId && sellerId.length ? sellerId : getRandomUuid();
+        // sellerId = "55fe241d-a58a-464d-b5bb-f77e4b55ab4e";
 
         const productMetaData = await product.create({
             itemId, 
-            sellerId, 
-            name, 
+            name,
             description, 
             price, 
             imageUrl, 
             category,
+            sellerId
         });
         res.status(200).json(productMetaData);
     } catch (err) {
