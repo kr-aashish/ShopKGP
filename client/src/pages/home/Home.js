@@ -41,7 +41,7 @@ function Home() {
       return <>Error: {error.message}</>
   }
   console.log("allProducts ", allProducts);
-  console.log("data ", data);
+  // console.log("data ", data);
 
   return (
     <>

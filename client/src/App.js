@@ -18,7 +18,7 @@ import ErrorPage from "./pages/error/Error";
 
 function App() {
   const { state } = useContext(UserContext);
-  console.log(state);
+  // console.log(state);
 
   return (
     <ThemeProvider theme={lightTheme}>
