@@ -173,13 +173,13 @@ function SellerInterface() {
       const sasToken = '?sv=2021-12-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-04-05T15:00:32Z&st=2023-04-05T07:00:32Z&sip=42.105.3.67&spr=https,http&sig=i%2FTygVFbsbbCe2qVk01DiySeJWQtFZ4K2naFIaU6qaM%3D';
 
       const file = event.target.files[0];
-      console.log(file);
+      // console.log(file);
       const blobName = `${Date.now()}`;
 
       const containerName = "shopkgp-media";
       const blobServiceClient = new BlobServiceClient(`https://${accountName}.blob.core.windows.net/${sasToken}`);
       // const blobServiceClient = new BlobServiceClient(`https://${accountName}.blob.core.windows.net/${process.env.SAS_TOKEN}`);
-      console.log('This is SAS token', process.env.SAS_TOKEN);
+      // console.log('This is SAS token', process.env.SAS_TOKEN);
       const containerClient = blobServiceClient.getContainerClient(containerName);
 
 
@@ -205,7 +205,7 @@ function SellerInterface() {
       }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
-          console.log('I was closed by the timer')
+          // console.log('I was closed by the timer')
         }
       })
 

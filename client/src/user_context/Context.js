@@ -34,7 +34,7 @@ export const UserContextProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    console.log("SETTING LOCAL STORAGE");
+    // console.log("SETTING LOCAL STORAGE");
     // validateToken();
   }, [state]);
 

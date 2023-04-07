@@ -12,7 +12,7 @@ function AccountNavbar() {
 
     const handleListItemClick = (event, index) => {
         setSelectedIndex(index);
-        console.log(theme.palette);
+        // console.log(theme.palette);
     };
 
     const customStyle = {
