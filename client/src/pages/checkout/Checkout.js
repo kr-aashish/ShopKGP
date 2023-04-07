@@ -12,7 +12,7 @@ function Checkout() {
   const [{ basket, user }, dispatch] = useStateValue();
   const { user_dispatch, state } = useContext(UserContext);
   // console.log(basket);
-  console.log("User metadata", state);
+  // console.log("User metadata", state);
 
   const navigate = useNavigate();
 
