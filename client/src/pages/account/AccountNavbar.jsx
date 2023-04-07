@@ -21,9 +21,9 @@ function AccountNavbar() {
 
     let componentToRender;
     if (selectedIndex === 1) {
-        componentToRender = <AccountContent/>;
-    } else if (selectedIndex === 2) {
         componentToRender = <OrderComponent/>;
+    } else if (selectedIndex === 2) {
+        componentToRender = <AccountContent/>;
     }
 
     return (
@@ -38,26 +38,27 @@ function AccountNavbar() {
                     <ListItemButton selected={selectedIndex === 1} onClick={(e) => handleListItemClick(e, 1)}
                                     style={customStyle}>
                         <ListItemIcon>
-                            <Person/>
-                        </ListItemIcon>
-                        <ListItemText primary="My Details"/>
-                    </ListItemButton>
-
-                    <ListItemButton selected={selectedIndex === 2} onClick={(e) => handleListItemClick(e, 2)}
-                                    style={customStyle}>
-                        <ListItemIcon>
                             <ShoppingCart/>
                         </ListItemIcon>
                         <ListItemText primary="My Orders"/>
                     </ListItemButton>
 
-                    <ListItemButton selected={selectedIndex === 3} onClick={(e) => handleListItemClick(e, 3)}
+                    <ListItemButton selected={selectedIndex === 2} onClick={(e) => handleListItemClick(e, 2)}
                                     style={customStyle}>
                         <ListItemIcon>
-                            <LocationOnTwoTone/>
+                            <Person/>
                         </ListItemIcon>
-                        <ListItemText primary="My Addresses"/>
+                        <ListItemText primary="My Details"/>
                     </ListItemButton>
+
+
+                    {/*<ListItemButton selected={selectedIndex === 3} onClick={(e) => handleListItemClick(e, 3)}*/}
+                    {/*                style={customStyle}>*/}
+                    {/*    <ListItemIcon>*/}
+                    {/*        <LocationOnTwoTone/>*/}
+                    {/*    </ListItemIcon>*/}
+                    {/*    <ListItemText primary="My Addresses"/>*/}
+                    {/*</ListItemButton>*/}
                 </List>
             </Box>
 
