@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import {Grid, Paper, TextField} from "@mui/material";
 import Typography from "@mui/material/Typography";
 import {makeStyles} from "@material-ui/core";
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -91,6 +92,13 @@ const useStyles = makeStyles((theme) => ({
             marginTop: theme.spacing(2),
         },
     },
+    chatIcon: {
+        color: '#25D366',
+        cursor: 'pointer',
+        width: '30px',
+        height: '30px',
+        marginLeft: '10px',
+    },
 }));
 
 
@@ -125,7 +133,8 @@ const OrderComponent = () => {
                         "quantity": 2
                     }
                 }
-            ]
+            ],
+            "sellerContactNumber": "7493017068"
         },
         {
             "orderId": "ORD789012",
@@ -143,7 +152,8 @@ const OrderComponent = () => {
                         "quantity": 1
                     }
                 }
-            ]
+            ],
+            "sellerContactNumber": "8084662242"
         },
         {
             "orderId": "ORD345678",
@@ -161,10 +171,16 @@ const OrderComponent = () => {
                         "quantity": 3
                     }
                 }
-            ]
+            ],
+            "sellerContactNumber": "123-456-7890"
         }
     ];
 
+    const openWhatsAppChat = (number) => {
+        const message = `Hello, I am interested in your products listed on ShopKGP. Please provide me with more details.`;
+        const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
+        window.open(url, "_blank");
+    };
 
     return (
         <Box flex={4} p={2}>
@@ -172,10 +188,13 @@ const OrderComponent = () => {
                 <Paper key={order.orderId} className={classes.root}>
                     <div className={classes.orderHeader}>
                         <Typography variant="h6" className={classes.orderNumber}>
-                            {order.orderId}
-                        </Typography>
-                        <Typography variant="subtitle2" className={classes.orderDate}>
                             {order.createdAt}
+                        </Typography>
+                        <Typography >
+                            {/*<a href={`https://wa.me/${order.sellerContactNumber}`} target="_blank">*/}
+                            {/*    <WhatsAppIcon className={classes.chatIcon}/>*/}
+                            {/*</a>*/}
+                            <WhatsAppIcon className={classes.chatIcon} onClick={() => openWhatsAppChat(order.sellerContactNumber)} />
                         </Typography>
                         <Typography variant="h6" className={classes.orderPrice}>
                             {order.price}
@@ -200,6 +219,11 @@ const OrderComponent = () => {
                                             <Typography variant="body1" className={classes.productPrice}>
                                                 Price: {product.price}
                                             </Typography>
+                                            {/*<Typography className={classes.chatIcon}>*/}
+                                            {/*    <a href="https://wa.me/1234567890" target="_blank">*/}
+                                            {/*        <WhatsAppIcon className={classes.chatIcon}/>*/}
+                                            {/*    </a>*/}
+                                            {/*</Typography>*/}
                                         </div>
                                     </Box>
                                 </Grid>
