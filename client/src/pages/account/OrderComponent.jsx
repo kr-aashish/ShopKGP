@@ -165,110 +165,51 @@ const OrderComponent = () => {
         }
     ];
 
-        return (
-            <Box flex={4} p={2}>
-                {orderHistory.map((order) => (
-                    <Paper key={order.orderId} className={classes.root} variant={"outlined"}>
-                        <div className={classes.orderHeader}>
-                            <Typography variant={"h5"} className={classes.orderNumber}>
-                                Order #{order.orderId}
-                            </Typography>
-                            <Typography variant={"body1"} className={classes.orderDate}>
-                                {order.createdAt}
-                            </Typography>
-                        </div>
-                        <Grid container spacing={2} className={classes.orderProducts}>
+
+    return (
+        <Box flex={4} p={2}>
+            {orderHistory.map((order) => (
+                <Paper key={order.orderId} className={classes.root}>
+                    <div className={classes.orderHeader}>
+                        <Typography variant="h6" className={classes.orderNumber}>
+                            {order.orderId}
+                        </Typography>
+                        <Typography variant="subtitle2" className={classes.orderDate}>
+                            {order.createdAt}
+                        </Typography>
+                        <Typography variant="h6" className={classes.orderPrice}>
+                            {order.price}
+                        </Typography>
+                    </div>
+                    <div className={classes.orderProducts}>
+                        <Grid container spacing={3}>
                             {order.products.map((product) => (
                                 <Grid item xs={12} sm={6} key={product.id}>
-                                    <div>
-                                        <img
-                                            src={product.image}
-                                            alt={product.name}
-                                            className={classes.productImage}
-                                        />
-                                        <Typography variant={"h6"} className={classes.productName}>
-                                            {product.name}
-                                        </Typography>
-                                        <Typography variant={"body2"} className={classes.productDescription}>
-                                            {product.description}
-                                        </Typography>
-                                        <Typography variant={"body2"} className={classes.productQuantity}>
-                                            Quantity: {product.orderProduct.quantity}
-                                        </Typography>
-                                        <Typography variant={"body2"} className={classes.productPrice}>
-                                            {product.price}
-                                        </Typography>
-                                    </div>
+                                    <Box display="flex" alignItems="center">
+                                        <img src={product.image} alt={product.name} className={classes.productImage} />
+                                        <div>
+                                            <Typography variant="h6" className={classes.productName}>
+                                                {product.name}
+                                            </Typography>
+                                            <Typography variant="body1" className={classes.productDescription}>
+                                                {product.description}
+                                            </Typography>
+                                            <Typography variant="body1" className={classes.productQuantity}>
+                                                Quantity: {product.orderProduct.quantity}
+                                            </Typography>
+                                            <Typography variant="body1" className={classes.productPrice}>
+                                                Price: {product.price}
+                                            </Typography>
+                                        </div>
+                                    </Box>
                                 </Grid>
                             ))}
-                            <Grid item xs={12}>
-                                <Typography variant={"h6"} className={classes.orderPrice}>
-                                    Total: {order.price}
-                                </Typography>
-                            </Grid>
                         </Grid>
-                    </Paper>
-                ))}
-            </Box>
-        );
-    };
+                    </div>
+                </Paper>
+            ))}
+        </Box>
+    );
+};
 
-    export default OrderComponent;
-
-
-//     return (
-//         <Box flex={4} p={2}>
-//             <Paper sx={{ padding: 4, borderRadius: 3, marginRight: 2 }} variant={"outlined"}>
-//                 <Typography variant={"h5"} pb={2} pt={2} fontWeight={"bolder"}>
-//                     Order History
-//                 </Typography>
-//                 {orderHistory.map((order) => (
-//                     <Paper key={order.orderId} sx={{ padding: 2, marginTop: 2 }} variant={"outlined"}>
-//                         <Typography variant={"body2"} fontWeight={"bold"} pb={1}>
-//                             Order #{order.orderId}
-//                         </Typography>
-//                         <Grid container spacing={2}>
-//                             <Grid item xs={12} sm={6}>
-//                                 <Typography variant={"body2"} fontWeight={"bold"}>
-//                                     Order Date:
-//                                 </Typography>
-//                                 <Typography variant={"body2"}>{order.createdAt}</Typography>
-//                             </Grid>
-//                             <Grid item xs={12} sm={6}>
-//                                 <Typography variant={"body2"} fontWeight={"bold"}>
-//                                     Order Total:
-//                                 </Typography>
-//                                 <Typography variant={"body2"}>{order.price}</Typography>
-//                             </Grid>
-//                         </Grid>
-//                         <Typography variant={"body2"} fontWeight={"bold"} pt={2}>
-//                             Products:
-//                         </Typography>
-//                         {order.products.map((product) => (
-//                             <Grid container key={product.id} sx={{ marginTop: 2 }}>
-//                                 <Grid item xs={2}>
-//                                     <img src={product.imageUrl} alt={product.name} style={{ maxWidth: "100%" }} />
-//                                 </Grid>
-//                                 <Grid item xs={10}>
-//                                     <Typography variant={"body2"} fontWeight={"bold"}>
-//                                         {product.name}
-//                                     </Typography>
-//                                     <Typography variant={"body2"}>{product.description}</Typography>
-//                                     <Typography variant={"body2"} fontWeight={"bold"}>
-//                                         Quantity: {product.orderProduct.quantity}
-//                                     </Typography>
-//                                     <Typography variant={"body2"} fontWeight={"bold"}>
-//                                         Price: {product.price}
-//                                     </Typography>
-//                                 </Grid>
-//                             </Grid>
-//                         ))}
-//                     </Paper>
-//                 ))}
-//             </Paper>
-//         </Box>
-//
-//     );
-// };
-//
-// export default OrderComponent;
+export default OrderComponent;
