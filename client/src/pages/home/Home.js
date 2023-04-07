@@ -3,48 +3,123 @@ import "./Home.css";
 import Product from "../../components/product/Product";
 import { Grid } from "@mui/material";
 import { data } from "../../data/products";
-import { Box } from "@mui/system";
-import PrimarySearchAppBar from "../../components/appbar/Appbar";
 import Footer from "../../components/footer/Footer";
 
 // import devConfig from '../../config/dev';
 import { useState, useEffect} from 'react';
 import axios from 'axios';
+import SearchIcon from "@mui/icons-material/Search";
+import {alpha, styled} from "@mui/material/styles";
+import InputBase from "@mui/material/InputBase";
+
+const Search = styled("div")(({ theme }) => ({
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+}));
+
+const SearchBox = styled("div")(({ theme }) => ({
+    position: "relative",
+    borderRadius: theme.shape.borderRadius + 5,
+    borderColor: theme.palette.divider,
+    borderWidth: 1,
+    backgroundColor: alpha(theme.palette.primary.main, 0.15),
+    "&:hover": {
+        backgroundColor: alpha(theme.palette.primary.green, 0.25),
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 10,
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+        marginLeft: theme.spacing(3),
+        width: "auto",
+    },
+    maxWidth: 500, // Set a maximum width for the search box
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    color: "inherit",
+    "& .MuiInputBase-input": {
+        padding: theme.spacing(1, 1, 1, 0),
+        // vertical padding + font size from searchIcon
+        paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+        transition: theme.transitions.create("width"),
+        width: "100%",
+        [theme.breakpoints.up("md")]: {
+            width: "20ch",
+        },
+        fontSize: "1.1rem", // Increase the font size of the input text
+    },
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+    padding: theme.spacing(0, 1), // Reduce the horizontal padding of the search icon
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 1, // Increase the z-index of the search icon to make it visible over the input text
+}));
+
 
 function Home() {
 
-  const [allProducts, setAllProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+    const [allProducts, setAllProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  useEffect(() => {
-      const fetchData = async () => {
-          try {
-              axios.get(`${process.env.REACT_APP_API_URL}/product/all`).then((response) => {
-                  setAllProducts(response.data);
-              });
-          } catch (err) {
-              setError(err);
-          } finally { 
-              setLoading(false);
-          }
-      };
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                axios.get(`${process.env.REACT_APP_API_URL}/product/all`).then((response) => {
+                    setAllProducts(response.data);
+                    setAllProducts(data);
+                });
 
-      fetchData();
-  }, []);
+            } catch (err) {
+                setError(err);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-  if (loading) {
-      return <>Loading...</>
-  }
+        fetchData();
+    }, []);
 
-  if (error) {
-      return <>Error: {error.message}</>
-  }
-  console.log("allProducts ", allProducts);
-  // console.log("data ", data);
+    if (loading) {
+        return <>Loading...</>
+    }
 
-  return (
-    <>
+    if (error) {
+        return <>Error: {error.message}</>
+    }
+
+    return (
+        <>
+            <Search>
+                <SearchBox
+                    style={{
+                        backgroundColor: "white",
+                        border: "0.1px solid rgb(110, 110, 110)",
+                    }}
+                >
+                    <SearchIconWrapper>
+                        <SearchIcon style={{ color: "black" }} />
+                    </SearchIconWrapper>
+                    <StyledInputBase
+                        sx={{
+                            borderColor: "black",
+                            color: "black",
+                        }}
+                        placeholder="Search…"
+                        inputProps={{ "aria-label": "search" }}
+                    />
+                </SearchBox>
+            </Search>
+
       <Grid container paddingTop={"5px"}>
         {allProducts.map((v, index) => (
           <Grid

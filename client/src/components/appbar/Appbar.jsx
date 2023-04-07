@@ -168,24 +168,26 @@ export default function PrimarySearchAppBar() {
           {/*    BuyNSellKGP*/}
           {/*</Typography>*/}
           <Logo />
-          <Search
-            style={{
-              backgroundColor: "white",
-              border: "0.1px solid rgb(110, 110, 110)",
-            }}
-          >
-            <SearchIconWrapper>
-              <SearchIcon style={{ color: "black" }} />
-            </SearchIconWrapper>
-            <StyledInputBase
-              sx={{
-                borderColor: "black",
-                color: "black",
-              }}
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+
+          {/*<Search*/}
+          {/*  style={{*/}
+          {/*    backgroundColor: "white",*/}
+          {/*    border: "0.1px solid rgb(110, 110, 110)",*/}
+          {/*  }}*/}
+          {/*>*/}
+          {/*  <SearchIconWrapper>*/}
+          {/*    <SearchIcon style={{ color: "black" }} />*/}
+          {/*  </SearchIconWrapper>*/}
+          {/*  <StyledInputBase*/}
+          {/*    sx={{*/}
+          {/*      borderColor: "black",*/}
+          {/*      color: "black",*/}
+          {/*    }}*/}
+          {/*    placeholder="Search…"*/}
+          {/*    inputProps={{ "aria-label": "search" }}*/}
+          {/*  />*/}
+          {/*</Search>*/}
+
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             {/*<IconButton*/}
