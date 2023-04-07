@@ -4,6 +4,8 @@ const checkoutProduct = async (req, res) => {
     console.log("This is the request", req.body);
     const {userMetadata, stripeItems, basket} = req.body;
 
+    console.log(stripeItems[0])
+
     const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
         line_items: stripeItems,
@@ -14,8 +16,12 @@ const checkoutProduct = async (req, res) => {
             email: userMetadata.email,
             images: JSON.stringify(basket.map(item => item.imageUrl)),
         },
-    })
-    console.log(session);
+        shipping_address_collection: {
+            allowed_countries: ['US', 'CA', 'IN'],
+        }
+    });
+
+    // console.log(session);
     const sessionId = session.id;
 
     res.status(200)

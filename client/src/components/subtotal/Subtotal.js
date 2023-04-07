@@ -48,7 +48,7 @@ function Subtotal() {
             currency: "inr",
             unit_amount: item.price * 100,
             product_data: {
-                name: item.title,
+                name: "Sample product",
                 images: [item.image],
                 description: item.title,
             }
