@@ -64,12 +64,14 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
     zIndex: 1, // Increase the z-index of the search icon to make it visible over the input text
 }));
 
-
 function Home() {
 
     const [allProducts, setAllProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const [searchTerm, setSearchTerm] = useState("");
+    const [filteredProducts, setFilteredProducts] = useState(allProducts);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -77,6 +79,8 @@ function Home() {
                 axios.get(`${process.env.REACT_APP_API_URL}/product/all`).then((response) => {
                     setAllProducts(response.data);
                     setAllProducts(data);
+
+                    setFilteredProducts(data);
                 });
 
             } catch (err) {
@@ -97,6 +101,21 @@ function Home() {
         return <>Error: {error.message}</>
     }
 
+    const handleSearch = (event) => {
+        const searchTerm = event.target.value.toLowerCase();
+        setSearchTerm(searchTerm);
+        const filteredProducts = allProducts.filter(
+            (product) =>
+                product.description.toLowerCase().includes(searchTerm)
+            // ||
+            // product.category.toLowerCase().includes(searchTerm) ||
+            // product.brand.toLowerCase().includes(searchTerm) ||
+            // product.color.toLowerCase().includes(searchTerm) ||
+            // product.size.toLowerCase().includes(searchTerm)
+        );
+        setFilteredProducts(filteredProducts);
+    };
+
     return (
         <>
             <Search>
@@ -116,12 +135,13 @@ function Home() {
                         }}
                         placeholder="Search…"
                         inputProps={{ "aria-label": "search" }}
+                        onChange={handleSearch}
                     />
                 </SearchBox>
             </Search>
 
       <Grid container paddingTop={"5px"}>
-        {allProducts.map((v, index) => (
+        {filteredProducts.map((v, index) => (
           <Grid
             key={index}
             xs={12}
