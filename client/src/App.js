@@ -14,7 +14,9 @@ import { ProductDetails } from "./pages/ProductDetails";
 import AddProduct from "./pages/AddProduct";
 import { Sell } from "@mui/icons-material";
 import ErrorPage from "./pages/error/Error";
+import orderConfirmationPage  from "./pages/account/orderPlaced";
 import AccountNavbar from "./pages/account/AccountNavbar";
+import OrderConfirmationPage from "./pages/account/orderPlaced";
 
 function App() {
   const { state } = useContext(UserContext);
@@ -62,6 +64,10 @@ function App() {
         <Route
           path="/error"
           element={<ErrorPage/>}
+        />
+        <Route
+            path="/success"
+            element={<OrderConfirmationPage/>}
         />
       </Routes>
     </ThemeProvider>
