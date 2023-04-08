@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 function Checkout() {
   const [{ basket, user }, dispatch] = useStateValue();
   const { user_dispatch, state } = useContext(UserContext);
-  // console.log(basket);
+  console.log(basket);
   // console.log("User metadata", state);
 
   const navigate = useNavigate();
@@ -40,6 +40,9 @@ function Checkout() {
             image={item.image}
             price={item.price}
             rating={item.rating}
+            description={item.description}
+            category={item.category}
+            sellerId={item.sellerId}
 
             // id={item.itemId}
             // title={item.description}

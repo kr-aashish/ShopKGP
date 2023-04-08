@@ -40,6 +40,8 @@ function Subtotal() {
     const [{ basket }, dispatch] = useStateValue();
     const { user_dispatch, state } = useContext(UserContext);
 
+    // console.log(basket);
+
     const userMetadata = state.data.metadata;
     const stripeItems = basket.map(item => ({
         quantity: 1,
@@ -48,13 +50,12 @@ function Subtotal() {
             currency: "inr",
             unit_amount: item.price * 100,
             product_data: {
-                name: "Sample product",
+                name: item.title,
                 images: [item.image],
-                description: item.title,
+                description: item.description,
             }
         }
     }));
-
     const createCheckoutSession = async () => {
         const stripe = await stripePromise;
 
@@ -87,7 +88,7 @@ function Subtotal() {
       />
       <ElementTable
         data={{
-          first: "GST and tax.",
+          first: "Shipping Charges",
           second: `Rs. ${(getBasketTotal(basket) * 0.03).toFixed(2)}`,
         }}
       />
