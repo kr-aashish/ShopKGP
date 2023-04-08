@@ -5,10 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { useStateValue } from "../../StateProvider";
 import PrimaryButton from "../buttons/PrimaryButton";
 import SecondaryButton from "../buttons/SecondaryButton";
+import CartIcon from "../Icons/CartIcon";
+import QuantityButton from "../product_details/QuantityButton";
 import "./Product.css";
 
-
-function Product({ id, title, image, price, rating, description, sellerId, category}) {
+function Product({ id, title, image, price, rating }) {
   const [{ basket }, dispatch] = useStateValue();
   const navigate = useNavigate();
 
@@ -36,8 +37,6 @@ function Product({ id, title, image, price, rating, description, sellerId, categ
     <div className="product">
       <div className="product__info">
         <p>{title}</p>
-          <p>{description}</p>
-          <p>{category}</p>
         <p className="product__price">
           <small>₹</small>
           <strong>{price}</strong>

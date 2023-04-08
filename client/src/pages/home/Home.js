@@ -158,10 +158,13 @@ function Home() {
               // rating={v.rating}
               // image={v.image}
               id={v.itemId}
-              title={v.description}
+              title={v.name}
               price={parseInt(v.price)}
               rating={5}
               image={v.imageUrl}
+              description={v.description}
+              category={v.category}
+              sellerId={v.sellerId}
             />
           </Grid>
         ))}
