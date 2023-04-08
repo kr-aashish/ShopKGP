@@ -152,11 +152,6 @@ function Home() {
             justifyContent={"center"}
           >
             <Product
-              // id={v.id}
-              // title={v.title}
-              // price={v.price}
-              // rating={v.rating}
-              // image={v.image}
               id={v.itemId}
               title={v.name}
               price={parseInt(v.price)}
