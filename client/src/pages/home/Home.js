@@ -107,8 +107,8 @@ function Home() {
         const filteredProducts = allProducts.filter(
             (product) =>
                 product.description.toLowerCase().includes(searchTerm)
-            // ||
-            // product.category.toLowerCase().includes(searchTerm) ||
+            || product.category.toLowerCase().includes(searchTerm)
+                // ||
             // product.brand.toLowerCase().includes(searchTerm) ||
             // product.color.toLowerCase().includes(searchTerm) ||
             // product.size.toLowerCase().includes(searchTerm)
