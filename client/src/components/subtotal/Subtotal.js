@@ -17,6 +17,8 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { loadStripe } from '@stripe/stripe-js';
 import {UserContext} from "../../user_context/Context";
+// import dotenv from 'dotenv';
+// dotenv.config();
 const stripePromise = loadStripe('pk_test_51MuCNiSBkSkzOkBhFpBbWVmbisUCRctfozyelUn9MXSaZj4SwIaqDZfoJoBpPpl0i8cYcAXzc0bKNdMBqIaQxSVb00KYjmav0K');
 
 function ElementTable({ data }) {
@@ -39,8 +41,6 @@ function ElementTable({ data }) {
 function Subtotal() {
     const [{ basket }, dispatch] = useStateValue();
     const { user_dispatch, state } = useContext(UserContext);
-
-    // console.log(basket);
 
     const userMetadata = state.data.metadata;
     const stripeItems = basket.map(item => ({

@@ -1,10 +1,11 @@
-const stripe = require('stripe')('sk_test_51MuCNiSBkSkzOkBh9AXSdkcKz6N5PTHYmcowGfIFh1H9zOcCa1kZJi3rm6OIe3DYoVeSPq8MCrvje6t4fOkyCVJN00aqC2lz04');
+require('dotenv').config();
+
+// const stripe = require('stripe')('sk_test_51MuCNiSBkSkzOkBh9AXSdkcKz6N5PTHYmcowGfIFh1H9zOcCa1kZJi3rm6OIe3DYoVeSPq8MCrvje6t4fOkyCVJN00aqC2lz04');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const checkoutProduct = async (req, res) => {
     console.log("This is the request", req.body);
     const {userMetadata, stripeItems, basket} = req.body;
-
-    console.log(stripeItems[0])
 
     const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],

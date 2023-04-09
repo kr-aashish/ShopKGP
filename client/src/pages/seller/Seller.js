@@ -311,7 +311,7 @@ function SellerInterface() {
                 onChange={handleCategoryChange}
                 fullWidth
               >
-                <MenuItem value="books">Book</MenuItem>
+                <MenuItem value="books">Books</MenuItem>
                 <MenuItem value="electronics">Electronics</MenuItem>
                 <MenuItem value="misc">Misc</MenuItem>
               </Select>
