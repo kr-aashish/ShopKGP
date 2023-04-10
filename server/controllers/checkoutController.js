@@ -6,6 +6,8 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const checkoutProduct = async (req, res) => {
     // console.log("This is the request", req.body);
     const {userMetadata, stripeItems, basket} = req.body;
+    const itemIdArray = basket.map(item => item.id);
+    console.log(itemIdArray);
 
     const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
@@ -15,7 +17,8 @@ const checkoutProduct = async (req, res) => {
         cancel_url: 'http://localhost:3000/error',
         metadata: {
             email: userMetadata.email,
-            images: JSON.stringify(basket.map(item => item.imageUrl)),
+            // images: JSON.stringify(basket.map(item => item.imageUrl)),
+            items: JSON.stringify(itemIdArray),
         },
         shipping_address_collection: {
             allowed_countries: ['US', 'CA', 'IN'],
