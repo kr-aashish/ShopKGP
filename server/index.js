@@ -23,6 +23,7 @@ app.use('/api/auth', authRouter);
 const orderRouter = require('./routes/orderRoutes');
 app.use('/api/order', orderRouter);
 
+app.use(bodyParser.raw());
 const webhookRouter = require('./routes/webhookRoutes')
 app.use('/api/webhook', webhookRouter);
 
