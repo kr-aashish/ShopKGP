@@ -20,7 +20,7 @@ const getOrderById = async (req, res) => {
 }
 
 const getOrderByUserId = async (req, res) => {
-    console.log(req.params.id);
+    // console.log(req.params.id);
     try {
         const orderData = await order.findAll({
             where: {userId: req.params.id},
