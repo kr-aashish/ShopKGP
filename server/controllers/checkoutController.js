@@ -4,7 +4,7 @@ require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 const checkoutProduct = async (req, res) => {
-    console.log("This is the request", req.body);
+    // console.log("This is the request", req.body);
     const {userMetadata, stripeItems, basket} = req.body;
 
     const session = await stripe.checkout.sessions.create({
