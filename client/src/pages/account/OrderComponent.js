@@ -125,8 +125,6 @@ const OrderComponent = () => {
                 await axios.get(`${process.env.REACT_APP_API_URL}/order/user/${userId}`).then((response) => {
                     // setAllOrders(response.data);
                     setAllOrders(response.data.reverse());
-                    console.log(response.data)
-                    console.log(allOrders);
                 });
 
             } catch (err) {
@@ -144,6 +142,8 @@ const OrderComponent = () => {
         const url = `https://wa.me/${number}?text=${encodeURIComponent(message)}`;
         window.open(url, "_blank");
     };
+
+    // console.log(allOrders[0].products[0].seller.contactNumber);
 
     return (
         <Box flex={4} p={2}>
@@ -174,7 +174,7 @@ const OrderComponent = () => {
 
                             <Typography>
                                 <img src={WhatsAppImg} alt="WhatsApp" className={classes.chatIcon} onClick={() =>
-                                    openWhatsAppChat(8084662242)
+                                    openWhatsAppChat(order.products[0].seller.contactNumber)
                                 }style={{width: '40px', height: '40px'}}
                                 />
                             </Typography>

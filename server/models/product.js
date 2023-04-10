@@ -34,6 +34,7 @@ module.exports = (sequelize, DataTypes) => {
                 allowNull: false,
             },
             onDelete: "CASCADE",
+            as: 'seller'
         });
 
         product.hasOne(models.stock, {

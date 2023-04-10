@@ -1,4 +1,4 @@
-const { order, product, stock } = require('../models');
+const {users, order, product, stock } = require('../models');
 // const webhookController = require('./webhookController');
 
 const getOrderById = async (req, res) => {
@@ -27,6 +27,10 @@ const getOrderByUserId = async (req, res) => {
             include: [{
                 model: product,
                 as: 'products',
+                include: [{
+                    model: users,
+                    as: 'seller'
+                }]
             }]
         });
         res.status(200).json(orderData);
