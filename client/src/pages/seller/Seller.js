@@ -253,11 +253,11 @@ function SellerInterface() {
         });
       })
       .finally (() => {
-        // setTitle("");
-        // setDescription("");
-        // setPrice("");
-        // setImage("");
-        // setCategory("");
+        setTitle("");
+        setDescription("");
+        setPrice("");
+        setImage("");
+        setCategory("");
       })
   };
 

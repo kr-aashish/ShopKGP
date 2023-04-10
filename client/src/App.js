@@ -63,11 +63,11 @@ function App() {
         />
         <Route
           path="/error"
-          element={<ErrorPage/>}
+          element={state?.isLoggedIn ? <ErrorPage/> : <SignInSide />}
         />
         <Route
             path="/success"
-            element={<OrderConfirmationPage/>}
+            element={state?.isLoggedIn ? <OrderConfirmationPage/> : <SignInSide />}
         />
       </Routes>
     </ThemeProvider>

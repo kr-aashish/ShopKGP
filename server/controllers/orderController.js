@@ -20,8 +20,24 @@ const getOrderById = async (req, res) => {
 }
 
 const getOrderByUserId = async (req, res) => {
-
+    console.log(req.params.id);
+    try {
+        const orderData = await order.findAll({
+            where: {userId: req.params.id},
+            include: [{
+                model: product,
+                as: 'products',
+            }]
+        });
+        res.status(200).json(orderData);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            message: 'Error in fetching orders',
+        });
+    }
 }
+
 
 const getAllOrders = async (req, res) => {
     try {
