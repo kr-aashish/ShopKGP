@@ -64,7 +64,7 @@ function CheckoutProduct({ id, image, title, price, rating, hideButton, descript
           {/*/>*/}
 
           {!hideButton && (
-              <PrimaryButton onClick={removeFromBasket} text="Remove from cart" />
+              <SecondaryButton onClick={removeFromBasket} text="Remove from cart" />
           )}
         </Box>
       </Box>
