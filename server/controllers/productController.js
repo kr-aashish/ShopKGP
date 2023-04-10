@@ -115,7 +115,7 @@ const getAllProducts = async (req, res) => {
 // }
 
 const createProduct = async (req, res) => {
-    console.log("This is the request", req.body);
+    // console.log("This is the request", req.body);
     let transaction;
     try {
         let { itemId, sellerId, name, description, price, imageUrl, category } = req.body;

@@ -9,7 +9,7 @@ const {users} = require('../models');
 
 const userSignup = async(req, res) => {
     try {
-        console.log("This is the request", req.body);
+        // console.log("This is the request", req.body);
         let {name, email, contactNumber, year, department, password} = req.body;
         const oldUser = await users.findOne({where: {email}});
 
