@@ -4,6 +4,7 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
+import StorefrontIcon from '@mui/icons-material/Storefront';
 import InputBase from "@mui/material/InputBase";
 import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
@@ -115,6 +116,7 @@ export default function PrimarySearchAppBar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
+
       {/*<MenuItem>*/}
       {/*  <IconButton size="large" aria-label="show 4 new mails" color="inherit">*/}
       {/*    <Badge badgeContent={4} color="error">*/}
@@ -124,19 +126,20 @@ export default function PrimarySearchAppBar() {
       {/*  <p>Messages</p>*/}
       {/*</MenuItem>*/}
 
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="show 17 new notifications"
-          color="inherit"
-        >
-          <Badge badgeContent={17} color="error">
-            <NotificationsIcon />
-          </Badge>
-        </IconButton>
-        <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      {/*<MenuItem>*/}
+      {/*  <IconButton*/}
+      {/*    size="large"*/}
+      {/*    aria-label="show 17 new notifications"*/}
+      {/*    color="inherit"*/}
+      {/*  >*/}
+      {/*    <Badge badgeContent={17} color="error">*/}
+      {/*      <NotificationsIcon />*/}
+      {/*    </Badge>*/}
+      {/*  </IconButton>*/}
+      {/*  <p>Notifications</p>*/}
+      {/*</MenuItem>*/}
+
+      <MenuItem onClick={() => goToPath("/account/:id")}>
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -148,6 +151,33 @@ export default function PrimarySearchAppBar() {
         </IconButton>
         <p>Profile</p>
       </MenuItem>
+
+      <MenuItem onClick={() => goToPath("/Seller")}>
+        <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+        >
+          <StorefrontIcon />
+        </IconButton>
+        <p>Seller Tool</p>
+      </MenuItem>
+
+      <MenuItem onClick={() => goToPath("/checkout")}>
+        <IconButton
+            size="large"
+            aria-label="account of current user"
+            aria-controls="primary-search-account-menu"
+            aria-haspopup="true"
+            color="inherit"
+        >
+          <ShoppingCart/>
+        </IconButton>
+        <p>Your Cart</p>
+      </MenuItem>
+
     </Menu>
   );
 
