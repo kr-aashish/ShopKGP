@@ -1,7 +1,7 @@
 import React from "react";
 import "./Home.css";
 import Product from "../../components/product/Product";
-import { Grid } from "@mui/material";
+import { Grid, CircularProgress } from "@mui/material";
 import { data } from "../../data/products";
 import Footer from "../../components/footer/Footer";
 
@@ -64,8 +64,22 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
     zIndex: 1, // Increase the z-index of the search icon to make it visible over the input text
 }));
 
-function Home() {
+export const Loading = () => {
+    return (
+        <div
+            style={{
+                position: "fixed",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+            }}
+        >
+            <CircularProgress />
+        </div>
+    );
+};
 
+function Home() {
     const [allProducts, setAllProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -76,7 +90,7 @@ function Home() {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                axios.get(`${process.env.REACT_APP_API_URL}/product/all`).then((response) => {
+                await axios.get(`${process.env.REACT_APP_API_URL}/product/all`).then((response) => {
                     setAllProducts(response.data);
                     // setAllProducts(data);
 
@@ -93,8 +107,10 @@ function Home() {
         fetchData();
     }, []);
 
+
     if (loading) {
-        return <>Loading...</>
+        // return <CircularProgress /> // Show the spinner while loading
+        return <Loading />;
     }
 
     if (error) {

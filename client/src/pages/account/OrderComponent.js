@@ -8,6 +8,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import axios from "axios";
 import {UserContext} from "../../user_context/Context";
 import WhatsAppImg from '../../assets/WhatsApp.svg.webp';
+import { Loading } from '../home/Home'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -114,9 +115,9 @@ const OrderComponent = () => {
     const userId = state.data.metadata.userId;
 
     const [allOrders, setAllOrders] = useState([]);
-    // const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(true);
 
-    // const [error, setError] = useState(null);
+    const [error, setError] = useState(null);
     // setAllOrders(allOrdersSample);
 
     useEffect(() => {
@@ -128,14 +129,18 @@ const OrderComponent = () => {
                 });
 
             } catch (err) {
-                // setError(err);
+                setError(err);
             } finally {
-                // setLoading(false);
+                setLoading(false);
             }
         };
 
         fetchData();
     }, []);
+
+    if (loading) {
+        return <Loading/>;
+    }
 
     const openWhatsAppChat = (number) => {
         const message = `Hello, I am interested in your products listed on ShopKGP. Please provide me with more details.`;
