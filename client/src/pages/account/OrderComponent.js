@@ -7,6 +7,8 @@ import {makeStyles} from "@material-ui/core";
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import axios from "axios";
 import {UserContext} from "../../user_context/Context";
+import WhatsAppImg from '../../assets/WhatsApp.svg.webp';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -55,6 +57,8 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     productImage: {
+        // maxHeight: '200px',
+        // width: "20%",
         maxWidth: '100%',
         maxHeight: '200px',
         marginRight: theme.spacing(2),
@@ -161,11 +165,19 @@ const OrderComponent = () => {
                             {/*<a href={`https://wa.me/${order.sellerContactNumber}`} target="_blank">*/}
                             {/*    <WhatsAppIcon className={classes.chatIcon}/>*/}
                             {/*</a>*/}
-                            <WhatsAppIcon className={classes.chatIcon}
-                                          onClick={() =>
-                                              // openWhatsAppChat(order.sellerContactNumber)
-                                              openWhatsAppChat(8084662242)
-                                            } />
+
+                            {/*<WhatsAppIcon className={classes.chatIcon}*/}
+                            {/*              onClick={() =>*/}
+                            {/*                  // openWhatsAppChat(order.sellerContactNumber)*/}
+                            {/*                  openWhatsAppChat(8084662242)*/}
+                            {/*                } />*/}
+
+                            <Typography>
+                                <img src={WhatsAppImg} alt="WhatsApp" className={classes.chatIcon} onClick={() =>
+                                    openWhatsAppChat(8084662242)
+                                }style={{width: '40px', height: '40px'}}
+                                />
+                            </Typography>
                         </Typography>
                         <Typography variant="h6" className={classes.orderPrice}>
                             {order.price}
