@@ -7,7 +7,7 @@ const checkoutProduct = async (req, res) => {
     // console.log("This is the request", req.body);
     const {userMetadata, stripeItems, basket} = req.body;
     const itemIdArray = basket.map(item => item.id);
-    console.log(itemIdArray);
+    // console.log(itemIdArray);
 
     const session = await stripe.checkout.sessions.create({
         payment_method_types: ["card"],
