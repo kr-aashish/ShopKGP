@@ -1,5 +1,5 @@
 const { order, product, stock } = require('../models');
-const webhookController = require('./webhookController');
+// const webhookController = require('./webhookController');
 
 const getOrderById = async (req, res) => {
     try {
@@ -17,6 +17,10 @@ const getOrderById = async (req, res) => {
             message: 'Error in fetching order',
         });
     }
+}
+
+const getOrderByUserId = async (req, res) => {
+
 }
 
 const getAllOrders = async (req, res) => {
@@ -81,75 +85,6 @@ const getAllOrders = async (req, res) => {
 //     }
 // }
 
-const createOrder = async (req, res) => {
-    try {
-        const {price, paymentInfo, shippingAddress, userId, products} = req.body;
-
-        //Do all checks before creating entry in order database
-        for (let i = 0; i < products.length; i++) {
-            const itemId = products[i].productId;
-            const productData = await product.findByPk(itemId);
-
-            if (!productData) {
-                res.status(404).json({
-                    message: 'Product not found',
-                });
-                return;
-            }
-
-            const stockData = await stock.findOne({
-                where: {itemId: itemId}
-            })
-
-            if (stockData && stockData.quantity < 1) {
-                res.status(404).json({
-                    message: 'Out of stock',
-                });
-                return;
-            }
-        }
-
-        // Create the order
-        const orderMetaData = await order.create({
-            price,
-            paymentInfo,
-            shippingAddress,
-            userId,
-        });
-
-        // Add each product to the order
-        for (let i = 0; i < products.length; i++) {
-            const itemId = products[i].productId;
-            const productData = await product.findByPk(itemId);
-
-            const stockData = await stock.findOne({
-                where: {itemId: itemId}
-            })
-
-            // Update the stock
-            if (stockData) {
-                stockData.quantity = stockData.quantity - products[i].quantity;
-                await stockData.save();
-            } else {
-                await stock.create({
-                    itemId,
-                    quantity: 0,
-                });
-            }
-
-            await productData.update({orderId: orderMetaData.orderId});
-        }
-
-        res.status(200).json(orderMetaData);
-    } catch (err) {
-        console.error(err);
-        res.status(500).json({
-            message: 'Error creating order',
-        });
-    }
-}
-
-
 const deleteOrder = async (req, res) => {
     try {
         const orderData = await order.findByPk(req.params.id);
@@ -187,6 +122,6 @@ const deleteOrder = async (req, res) => {
 module.exports = {
     getOrderById,
     getAllOrders,
-    createOrder,
+    getOrderByUserId,
     deleteOrder,
 };

@@ -6,7 +6,7 @@ router.get('/all', orderController.getAllOrders);
 
 router.get('/get/:id', orderController.getOrderById);
 
-router.post('/create', orderController.createOrder);
+router.post('/getAll/:id', orderController.getOrderByUserId);
 
 router.delete('/delete/:id', orderController.deleteOrder);
 

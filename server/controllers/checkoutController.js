@@ -16,7 +16,7 @@ const checkoutProduct = async (req, res) => {
         success_url: 'http://localhost:3000/success',
         cancel_url: 'http://localhost:3000/error',
         metadata: {
-            email: userMetadata.email,
+            userId: userMetadata.userId,
             // images: JSON.stringify(basket.map(item => item.imageUrl)),
             items: JSON.stringify(itemIdArray),
         },

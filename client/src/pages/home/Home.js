@@ -78,9 +78,9 @@ function Home() {
             try {
                 axios.get(`${process.env.REACT_APP_API_URL}/product/all`).then((response) => {
                     setAllProducts(response.data);
-                    setAllProducts(data);
+                    // setAllProducts(data);
 
-                    setFilteredProducts(data);
+                    setFilteredProducts(response.data);
                 });
 
             } catch (err) {
