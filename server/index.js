@@ -23,6 +23,9 @@ app.use('/api/auth', authRouter);
 const orderRouter = require('./routes/orderRoutes');
 app.use('/api/order', orderRouter);
 
+const webhookRouter = require('./routes/webhookRoutes')
+app.use('/api/webhook', webhookRouter);
+
 const { API_PORT } = process.env;
 const port = API_PORT || 3001;
 
