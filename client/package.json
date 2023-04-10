@@ -17,6 +17,7 @@
     "@testing-library/user-event": "^13.5.0",
     "aws-sdk": "^2.1328.0",
     "axios": "^1.2.3",
+    "dotenv": "^16.0.3",
     "dotenv-webpack": "^8.0.1",
     "react": "^18.2.0",
     "react-currency-format": "^1.1.0",

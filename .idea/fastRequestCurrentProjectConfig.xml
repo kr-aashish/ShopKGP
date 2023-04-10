@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="fastRequestCurrentProjectConfig">
+    <option name="dataList">
+      <list>
+        <NameGroup>
+          <option name="hostGroup">
+            <list>
+              <HostGroup>
+                <option name="env" value="env" />
+                <option name="url" value="" />
+              </HostGroup>
+            </list>
+          </option>
+          <option name="name" value="shopkgp" />
+        </NameGroup>
+      </list>
+    </option>
+    <option name="enableEnv" value="env" />
+    <option name="enableProject" value="shopkgp" />
+    <option name="envList">
+      <list>
+        <option value="env" />
+      </list>
+    </option>
+    <option name="projectList">
+      <list>
+        <option value="shopkgp" />
+      </list>
+    </option>
+  </component>
+</project>

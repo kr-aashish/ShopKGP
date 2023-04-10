@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="cdApiTest">
+    <option name="favouriteCollections">
+      <list>
+        <ApiCollection>
+          <option name="name" value="DefaultCollection" />
+          <option name="order" value="0" />
+        </ApiCollection>
+      </list>
+    </option>
+    <option name="historyCollections">
+      <list>
+        <ApiCollection>
+          <option name="name" value="DefaultCollection" />
+          <option name="order" value="0" />
+        </ApiCollection>
+      </list>
+    </option>
+  </component>
+</project>
