@@ -122,32 +122,41 @@ const createProduct = async (req, res) => {
 
         itemId = itemId && itemId.length ? itemId : getRandomUuid();
 
-        transaction = await sequelize.transaction();
+        // transaction = await sequelize.transaction();
+        // const productMetaData = await product.create({
+        //     itemId,
+        //     sellerId: 'e268c744-b009-46c5-b5ff-1ebd391886b6',
+        //     name: 'Hi',
+        //     description: 'Hey there, this is a sample product',
+        //     price: 290,
+        //     imageUrl: 'https://shopkgp.blob.core.windows.net/shopkgp-media/1681198139203',
+        //     category: 'electronics'
+        // });
+        // , { transaction });
+        //
         const productMetaData = await product.create({
             itemId,
+            sellerId,
             name,
             description,
-            price,
+            price: parseInt(price),
             imageUrl,
-            category,
-            sellerId
-        }, { transaction });
-
+            category
+        });
         await stock.create({
             itemId,
             quantity: 1
-        }, { transaction });
+        });
+        // { transaction });
 
-        await transaction.commit();
+        // await transaction.commit();
         res.status(200)
             // .json("Successful")
             .json(productMetaData);
     } catch (err) {
         console.log(err);
-        if (transaction) await transaction.rollback();
-        res.status(500).json({
-            message: 'Error creating product',
-        });
+        // if (transaction) await transaction.rollback();
+        res.status(500).send(err);
     }
 }
 
