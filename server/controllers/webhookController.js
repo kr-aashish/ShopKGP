@@ -4,7 +4,7 @@
 const { order, product, stock } = require('../models');
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-const endpointSecret = 'whsec_0ce5c547c31fcb5c9684cfdd6ecf8144b1166589944e1c0903897c248de26b87';
+const endpointSecret = process.env.STRIPE_ENDPOINT_SECRET;
 
 const createOrder = async (orderData) => {
     console.log('This is the order', orderData);
