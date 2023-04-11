@@ -114,7 +114,20 @@ function Home() {
     }
 
     if (error) {
-        return <>Error: {error.message}</>
+        // return <>Error: {error.message}</>
+        return (
+            <div
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    minHeight: "100vh",
+                }}
+            >
+                <h1>Oops! Something went wrong</h1>
+                {/*<p>{error.message}</p>*/}
+            </div>
+        );
     }
 
     const handleSearch = (event) => {
