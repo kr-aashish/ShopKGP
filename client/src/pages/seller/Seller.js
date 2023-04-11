@@ -171,6 +171,11 @@ function SellerInterface() {
       //UPDATED IN ENV TODO
       const accountName = "shopkgp";
       const sasToken = '?sv=2021-12-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-04-11T14:06:33Z&st=2023-04-11T06:06:33Z&spr=https,http&sig=Z%2BFQZjfmiK41YCJQQmwSaXPlP16xwIsEU9fojNG17Sc%3D';
+      // localhost
+      // const sasToken = '?sv=2021-12-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-08-15T18:41:36Z&st=2023-04-11T10:41:36Z&sip=40.112.63.159&spr=https&sig=xDeCbMbibyqjzoVVZ%2B4UAUFWhnIcjUunYwkJFy4dECU%3D';
+      //Azure VM
+
+
       // console.log(sasToken, process.env.SAS_TOKEN);
       const file = event.target.files[0];
       // console.log(file);
