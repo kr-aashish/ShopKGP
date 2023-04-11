@@ -7,6 +7,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json()); //for post request body as json..parse!
 app.use(cors());//to whitelist the api request
+// const helmet = require('helmet');
+// app.use(helmet());
 
 const db = require('./models');
 
