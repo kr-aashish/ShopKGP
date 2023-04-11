@@ -20,7 +20,7 @@ const config = {
     },
     logging: false,
     pool: {
-        max: 1000,
+        max: 10000,
         min: 0,
         acquire: 30000,
         idle: 10000,
@@ -31,7 +31,7 @@ const db = {};
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
 // 'use strict';
-//
+
 // const fs = require('fs');
 // const path = require('path');
 // const Sequelize = require('sequelize');

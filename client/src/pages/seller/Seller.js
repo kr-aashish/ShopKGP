@@ -170,8 +170,8 @@ function SellerInterface() {
 
       //UPDATED IN ENV TODO
       const accountName = "shopkgp";
-      const sasToken = '?sv=2021-12-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-04-05T15:00:32Z&st=2023-04-05T07:00:32Z&sip=42.105.3.67&spr=https,http&sig=i%2FTygVFbsbbCe2qVk01DiySeJWQtFZ4K2naFIaU6qaM%3D';
-
+      const sasToken = '?sv=2021-12-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-04-11T14:06:33Z&st=2023-04-11T06:06:33Z&spr=https,http&sig=Z%2BFQZjfmiK41YCJQQmwSaXPlP16xwIsEU9fojNG17Sc%3D';
+      // console.log(sasToken, process.env.SAS_TOKEN);
       const file = event.target.files[0];
       // console.log(file);
       const blobName = `${Date.now()}`;
