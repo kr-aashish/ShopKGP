@@ -27,9 +27,10 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import { FcGoogle } from 'react-icons/fc';
 import facebook from '../../assets/facebook.svg'
+import instagram from '../../assets/instagram.svg'
 // import linkedin from '../../assets/linkedin.svg'
 // import github from '../../assets/github.svg'
-import { LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
+import { LoginSocialFacebook, LoginSocialGoogle, LoginSocialInstagram} from 'reactjs-social-login';
 // import { useAuth0 } from '@auth0/auth0-react';
 import { initializeApp } from 'firebase/app';
 import { getAuth, GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
@@ -330,6 +331,28 @@ export default function SignInSide() {
                 </Button>
               </LoginSocialFacebook>
 
+              <LoginSocialInstagram
+                  client_id='1676187482836082'
+                  client_secret='8ed95b1e49476a13bd13e7c57c65c9b4'
+                  redirect_uri='https://github.com/kr-aashish'
+                  // onLoginStart={}
+                  // onLogoutSuccess={}
+                  // onResolve={({ provider, data }: IResolveParams) => {
+                  //   console.log(provider, data)
+                  // }}
+                  scopes={['user_profile', 'user_media']}
+                  onResolve={(response) => {
+                    console.log(response);
+                    // handleSocialLogin(response.data.email)
+                  }}
+                  onReject={(err) => {
+                    console.log(err);
+                  }}
+              >
+                <Button>
+                  <img src={instagram} style={{ height: "3.5rem" }}/>
+                </Button>
+              </LoginSocialInstagram>
 
               {/*<Avatar sx={{ m: 1 }}>*/}
               {/*  <img src={linkedin} />*/}
