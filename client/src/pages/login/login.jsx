@@ -25,7 +25,10 @@ import { Alert, Snackbar } from "@mui/material";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
-import GoogleIcon from '@mui/icons-material/Google';
+import { FcGoogle } from 'react-icons/fc';
+import facebook from '../../assets/facebook.svg'
+// import linkedin from '../../assets/linkedin.svg'
+// import github from '../../assets/github.svg'
 
 export default function SignInSide() {
   const navigate = useNavigate();
@@ -116,6 +119,46 @@ export default function SignInSide() {
       default:
         return <></>;
     }
+  };
+
+  const styles = {
+    root: {
+      display: 'flex',
+      justifyContent: 'center',
+      marginTop: '2rem',
+    },
+    button: {
+      display: 'flex',
+      alignItems: 'center',
+      backgroundColor: '#fff',
+      color: '#333',
+      borderRadius: '2rem',
+      padding: '1.2rem 2.5rem',
+      fontWeight: 'bold',
+      fontSize: '1.6rem',
+      textTransform: 'none',
+      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+      transition: 'background-color 0.2s',
+      '&:hover': {
+        backgroundColor: '#eee',
+      },
+      '&:active': {
+        backgroundColor: '#ddd',
+        boxShadow: 'none',
+      },
+      '&:focus': {
+        boxShadow: '0px 0px 0px 3px rgba(0, 0, 0, 0.3)',
+      },
+    },
+    icon: {
+      marginRight: '1rem',
+      fontSize: '2.5rem',
+    },
+    logo: {
+      // marginRight: '1rem',
+      // maxHeight: '2rem',
+
+    },
   };
 
   return (
@@ -216,19 +259,48 @@ export default function SignInSide() {
               </Grid>
             </Grid>
 
-            <Box sx={{display: 'flex', m: 2, justifyContent: 'center', mt: 7}}>
-              <Avatar sx={{ m: 1, bgcolor: "grey" }}>
-                <GoogleIcon />
-              </Avatar>
-              <Avatar sx={{ m: 1, bgcolor: "grey" }}>
-                <FacebookIcon />
-              </Avatar>
-              <Avatar sx={{ m: 1, bgcolor: "grey" }}>
-                <LinkedInIcon />
-              </Avatar>
-              <Avatar sx={{ m: 1, bgcolor: "grey" }}>
-                <GitHubIcon />
-              </Avatar>
+            {/*<Box sx={styles.root}>*/}
+            {/*  <Button sx={styles.button}>*/}
+            {/*    <FcGoogle sx={styles.icon} />*/}
+            {/*    Sign in with Google*/}
+            {/*  </Button>*/}
+            {/*  <Button sx={{ ...styles.button, backgroundColor: '#3b5998', color: '#fff' }}>*/}
+            {/*    <img src={facebook} alt="Facebook logo" sx={styles.logo} />*/}
+            {/*    Sign in with Facebook*/}
+            {/*  </Button>*/}
+            {/*</Box>*/}
+
+            <Box
+                sx={{
+                  // my: 8,
+                  // mx: 4,
+                  mt: 4,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+            >
+              {/*<Avatar sx={{ m: 1, bgcolor: "primary.main" }}>*/}
+              {/*  <LockOutlinedIcon />*/}
+              {/*</Avatar>*/}
+              <Typography component="h1" variant="h5">
+                Social Login
+              </Typography>
+            </Box>
+
+            <Box sx={{ display: 'flex', m: 2, justifyContent: 'center', mt: 1}}>
+              <Button sx={{fontSize: "3.5rem" }}>
+                <FcGoogle/>
+              </Button>
+              <Button>
+                <img src={facebook} style={{ maxHeight: "10rem" }}/>
+              </Button>
+              {/*<Avatar sx={{ m: 1 }}>*/}
+              {/*  <img src={linkedin} />*/}
+              {/*</Avatar>*/}
+              {/*<Avatar sx={{ m: 1 }}>*/}
+              {/*  <img src={github} />*/}
+              {/*</Avatar>*/}
             </Box>
 
             <Copyright sx={{ mt: 5 }} />
