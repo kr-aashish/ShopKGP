@@ -14,7 +14,7 @@ const Logo = () => {
       <Box
         component="img"
         sx={{
-          width: 150,
+          width: 175,
           display: { xs: "none", sm: "block" },
           cursor: "pointer",
         }}
