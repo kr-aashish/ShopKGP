@@ -29,6 +29,7 @@ import { FcGoogle } from 'react-icons/fc';
 import facebook from '../../assets/facebook.svg'
 // import linkedin from '../../assets/linkedin.svg'
 // import github from '../../assets/github.svg'
+import { LoginSocialFacebook } from 'reactjs-social-login';
 
 export default function SignInSide() {
   const navigate = useNavigate();
@@ -77,6 +78,20 @@ export default function SignInSide() {
     }
   };
 
+  const handleFacebookLogin = async (email) => {
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/facebooklogin`, {
+      email
+    });
+
+    if (res.status === 200) {
+      setOpen(0);
+      user_dispatch(LoginSuccess({ token: res.data.token, metadata: res.data }));
+    } else {
+      setOpen(1);
+      user_dispatch(LoginError(null));
+    }
+  }
+
   const errorMessage = () => {
     switch (open) {
       case 0:
@@ -119,46 +134,6 @@ export default function SignInSide() {
       default:
         return <></>;
     }
-  };
-
-  const styles = {
-    root: {
-      display: 'flex',
-      justifyContent: 'center',
-      marginTop: '2rem',
-    },
-    button: {
-      display: 'flex',
-      alignItems: 'center',
-      backgroundColor: '#fff',
-      color: '#333',
-      borderRadius: '2rem',
-      padding: '1.2rem 2.5rem',
-      fontWeight: 'bold',
-      fontSize: '1.6rem',
-      textTransform: 'none',
-      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-      transition: 'background-color 0.2s',
-      '&:hover': {
-        backgroundColor: '#eee',
-      },
-      '&:active': {
-        backgroundColor: '#ddd',
-        boxShadow: 'none',
-      },
-      '&:focus': {
-        boxShadow: '0px 0px 0px 3px rgba(0, 0, 0, 0.3)',
-      },
-    },
-    icon: {
-      marginRight: '1rem',
-      fontSize: '2.5rem',
-    },
-    logo: {
-      // marginRight: '1rem',
-      // maxHeight: '2rem',
-
-    },
   };
 
   return (
@@ -289,12 +264,27 @@ export default function SignInSide() {
             </Box>
 
             <Box sx={{ display: 'flex', m: 2, justifyContent: 'center', mt: 1}}>
+
               <Button sx={{fontSize: "3.5rem" }}>
                 <FcGoogle/>
               </Button>
-              <Button>
-                <img src={facebook} style={{ maxHeight: "10rem" }}/>
-              </Button>
+
+              <LoginSocialFacebook
+                 appId="3646147145671813"
+                 onResolve={(response) => {
+                   console.log(response.data.email);
+                   handleFacebookLogin(response.data.email)
+                 }}
+                 onReject={(error) => {
+                   console.log(error);
+                 }}
+              >
+                <Button>
+                  <img src={facebook} style={{ maxHeight: "10rem" }}/>
+                </Button>
+              </LoginSocialFacebook>
+
+
               {/*<Avatar sx={{ m: 1 }}>*/}
               {/*  <img src={linkedin} />*/}
               {/*</Avatar>*/}

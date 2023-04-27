@@ -82,6 +82,27 @@ const userLogin = async(req, res) => {
     }
 }
 
+const facebookLogin = async(req, res) => {
+    try {
+        const {email} = req.body;
+
+        const user = await users.findOne({where : {email}});
+
+        if (user) {
+            res.status(200).json(user);
+        }
+        else {
+            res.status(400).send("Invalid credentials");
+        }
+
+    } catch(error) {
+        console.log(error);
+        res.status(500).send({
+            message: "Internal Server error",
+        });
+    }
+}
+
 const handleAnyOtherCase = (req, res) => {
     res.status(404).send({
         status: "false", 
@@ -94,4 +115,5 @@ module.exports = {
     userSignup,
     userLogin, 
     handleAnyOtherCase,
+    facebookLogin
 }
