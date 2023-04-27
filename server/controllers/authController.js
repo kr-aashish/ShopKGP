@@ -82,7 +82,7 @@ const userLogin = async(req, res) => {
     }
 }
 
-const facebookLogin = async(req, res) => {
+const socialLogin = async(req, res) => {
     try {
         const {email} = req.body;
 
@@ -115,5 +115,5 @@ module.exports = {
     userSignup,
     userLogin, 
     handleAnyOtherCase,
-    facebookLogin
+    socialLogin
 }

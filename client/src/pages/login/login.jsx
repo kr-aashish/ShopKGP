@@ -29,11 +29,13 @@ import { FcGoogle } from 'react-icons/fc';
 import facebook from '../../assets/facebook.svg'
 // import linkedin from '../../assets/linkedin.svg'
 // import github from '../../assets/github.svg'
-import { LoginSocialFacebook } from 'reactjs-social-login';
+import { LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
+// import { useAuth0 } from '@auth0/auth0-react';
+import { initializeApp } from 'firebase/app';
+import { getAuth, GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
 
 export default function SignInSide() {
   const navigate = useNavigate();
-
   const [open, setOpen] = React.useState(-1);
 
   const handleClose = (event, reason) => {
@@ -78,8 +80,8 @@ export default function SignInSide() {
     }
   };
 
-  const handleFacebookLogin = async (email) => {
-    const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/facebooklogin`, {
+  const handleSocialLogin = async (email) => {
+    const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/social`, {
       email
     });
 
@@ -90,6 +92,33 @@ export default function SignInSide() {
       setOpen(1);
       user_dispatch(LoginError(null));
     }
+  }
+
+  const handleGoogleLogin = () => {
+    const firebaseConfig = {
+      apiKey: "AIzaSyCHc8nkBgQ6Y82Uz07mS4M9HhBvTceMIrw",
+      authDomain: "shopkgp.firebaseapp.com",
+      projectId: "shopkgp",
+      storageBucket: "shopkgp.appspot.com",
+      messagingSenderId: "606043630129",
+      appId: "1:606043630129:web:0e98c4505a46dd1d6f0310",
+      measurementId: "G-BJWT63JVYB"
+    };
+
+    // const { user, loginWithRedirect } = useAuth0();
+
+    const firebaseApp = new initializeApp(firebaseConfig);
+    const auth = getAuth(firebaseApp);
+    const provider = new GoogleAuthProvider();
+
+    signInWithPopup(auth, provider)
+        .then((result) => {
+          console.log(result);
+          handleSocialLogin(result.user.email)
+        })
+        .catch((error) => {
+          console.log(error);
+        })
   }
 
   const errorMessage = () => {
@@ -265,7 +294,24 @@ export default function SignInSide() {
 
             <Box sx={{ display: 'flex', m: 2, justifyContent: 'center', mt: 1}}>
 
-              <Button sx={{fontSize: "3.5rem" }}>
+              {/*<LoginSocialGoogle*/}
+              {/*    // clientId={process.env.GOOGLE_CLIENT_ID || ''}*/}
+              {/*    // onLoginStart={onLoginStart}*/}
+              {/*    client_Id='627668627856-9khhovnrs3m3ll3cs0m8d6hn7coihk64.apps.googleusercontent.com'*/}
+              {/*    // redirect_url={process.env.REACT_APP_HOST_URL}*/}
+              {/*    scope="openid profile email"*/}
+              {/*    discoveryDocs="claims_supported"*/}
+              {/*    access_type="offline"*/}
+              {/*    onResolve={({ provider, data }) => {*/}
+              {/*      console.log(provider, data);*/}
+              {/*    }}*/}
+              {/*    onReject={err => {*/}
+              {/*      console.log(err);*/}
+              {/*    }}*/}
+              {/*>*/}
+              {/*</LoginSocialGoogle>*/}
+
+              <Button sx={{fontSize: "3.5rem" }} onClick={handleGoogleLogin}>
                 <FcGoogle/>
               </Button>
 
@@ -273,14 +319,14 @@ export default function SignInSide() {
                  appId="3646147145671813"
                  onResolve={(response) => {
                    console.log(response.data.email);
-                   handleFacebookLogin(response.data.email)
+                   handleSocialLogin(response.data.email)
                  }}
                  onReject={(error) => {
                    console.log(error);
                  }}
               >
                 <Button>
-                  <img src={facebook} style={{ maxHeight: "10rem" }}/>
+                  <img src={facebook} style={{ height: "3.5rem" }}/>
                 </Button>
               </LoginSocialFacebook>
 

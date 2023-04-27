@@ -6,7 +6,7 @@ router.post('/signup', authController.userSignup);
 
 router.post('/login', authController.userLogin);
 
-router.post('/facebooklogin', authController.facebookLogin);
+router.post('/social', authController.socialLogin);
 
 router.use('*', authController.handleAnyOtherCase);
 
