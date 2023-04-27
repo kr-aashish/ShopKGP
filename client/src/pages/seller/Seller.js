@@ -170,9 +170,9 @@ function SellerInterface() {
 
       //UPDATED IN ENV TODO
       const accountName = "shopkgp";
-      const sasToken = '?sv=2021-12-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-04-11T14:06:33Z&st=2023-04-11T06:06:33Z&spr=https,http&sig=Z%2BFQZjfmiK41YCJQQmwSaXPlP16xwIsEU9fojNG17Sc%3D';
+      // const sasToken = '?sv=2021-12-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-08-15T18:41:36Z&st=2023-04-11T10:41:36Z&sip=40.112.63.159-42.105.0.132&spr=https&sig=67dMl%2B%2BqZK32ZUDf0t3%2FW%2B%2BqO7VNt%2F0eVsYDqA3ykNs%3D';
       // localhost
-      // const sasToken = '?sv=2021-12-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-08-15T18:41:36Z&st=2023-04-11T10:41:36Z&sip=40.112.63.159&spr=https&sig=xDeCbMbibyqjzoVVZ%2B4UAUFWhnIcjUunYwkJFy4dECU%3D';
+      const sasToken = '?sv=2021-12-02&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2023-04-18T17:27:54Z&st=2023-04-18T09:27:54Z&sip=42.105.101.245&spr=https,http&sig=4dNVq2a6A63U8PCwTvB4MB4y5TysOY7Rn%2FE5CbRKO%2Bs%3D';
       //Azure VM
 
 

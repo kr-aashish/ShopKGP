@@ -17,58 +17,19 @@ const createOrder = async (orderData) => {
     const paymentInfo = id;
 
     try {
-        //Do all checks before creating entry in order database
-
-        // for (let i = 0; i < products.length; i++) {
-        //     const itemId = products[i];
-        //     const productData = await product.findByPk(itemId);
-        //
-        //     if (!productData) {
-        //         res.status(404).json({
-        //             message: 'Product not found',
-        //         });
-        //         return;
-        //     }
-        //
-        //     const stockData = await stock.findOne({
-        //         where: {itemId: itemId}
-        //     })
-        //
-        //     if (stockData && stockData.quantity < 1) {
-        //         res.status(404).json({
-        //             message: 'Out of stock',
-        //         });
-        //         return;
-        //     }
-        // }
-
-        // Create the order
-        // const orderMetaData = await order.create({
-        //     // orderId,
-        //     price,
-        //     paymentInfo,
-        //     shippingAddress,
-        //     userId,
-        // });
-        // res.status(200).json(orderMetaData);
-
         const orderMetaData = await order.create({
             price,
             paymentInfo,
             shippingAddress,
             userId,
         });
-        // console.log(orderMetaData);
 
         for (const itemId of products) {
             const productData = await product.findByPk(itemId);
-            // console.log(productData);
 
             const stockData = await stock.findOne({
                 where: {itemId: itemId}
             })
-            // console.log(stockData);
-
 
             // Update the stock
             if (stockData) {
@@ -84,45 +45,17 @@ const createOrder = async (orderData) => {
             await productData.update({orderId: orderMetaData.orderId});
         }
 
-        // Add each product to the order
-        // for (let i = 0; i < products.length; i++) {
-        // const itemId = products[i];
-        // console.log(itemId);
+        //Create and send invoice
+        const invoice = await stripe.invoices.create({
+            customer: id, // Replace customerId with the Stripe customer ID
+            description: 'Invoice for order ' + orderMetaData.orderId, // Add a description for the invoice
+            // amount_due: amount_total,
+            currency: 'inr',
+            metadata: {orderId: orderMetaData.orderId}, // Add metadata to associate the invoice with the order
+            statement_descriptor: 'ShopKGP', // Replace with your business name
+        });
 
-        // const productData = await product.findByPk(itemId);
-        // console.log(productData);
-        //
-        // const stockData = await stock.findOne({
-        //     where: {itemId: itemId}
-        // })
-        // console.log(stockData);
-
-        //
-        // // Update the stock
-        // if (stockData) {
-        //     stockData.quantity = stockData.quantity - products[i].quantity;
-        //     await stockData.save();
-        // } else {
-        //     await stock.create({
-        //         itemId,
-        //         quantity: 0,
-        //     });
-        // }
-        //
-        // await productData.update({orderId: orderMetaData.orderId});
-        // }
-
-        // Create and send invoice
-        // const invoice = await stripe.invoices.create({
-        //     customer: id, // Replace customerId with the Stripe customer ID
-        //     description: 'Invoice for order ' + orderMetaData.orderId, // Add a description for the invoice
-        //     // amount_due: amount_total,
-        //     currency: 'inr',
-        //     metadata: {orderId: orderMetaData.orderId}, // Add metadata to associate the invoice with the order
-        //     statement_descriptor: 'ShopKGP', // Replace with your business name
-        // });
-        //
-        // await stripe.invoices.sendInvoice(invoice.id); // Send the invoice to the customer
+        await stripe.invoices.sendInvoice(invoice.id); // Send the invoice to the customer
 
     } catch (err) {
         console.error(err);
@@ -133,9 +66,6 @@ const createOrder = async (orderData) => {
 }
 
 const postOrder = async (req, res) => {
-    // console.log('This is the request from Stripe', req.body);
-    // const requestBuffer = await buffer(req);
-    // const payload = requestBuffer.toString();
     const payload = req.body;
     const payloadString = JSON.stringify(payload, null, 2);
 
@@ -144,20 +74,6 @@ const postOrder = async (req, res) => {
         secret: endpointSecret,
     });
     const event = stripe.webhooks.constructEvent(payloadString, header, endpointSecret);
-
-    // let event;
-    // //Verify that the signature is from Stripe
-    // try {
-    //     event = stripe.webhooks.constructEvent(payload, signature, endpointSecret);
-    // } catch (error) {
-    //     console.log(error.message);
-    //     return res.status(400).json({success: false});
-    //     // .send(`Webhook Error: ${error.message}`);
-    // }
-
-    // Do something with mocked signed event
-    // expect(event.id).to.equal(payload.id);
-    // console.log(event.id, payload.id);
 
     //Handle checkout session complete event
     if (event.type === 'checkout.session.completed') {
