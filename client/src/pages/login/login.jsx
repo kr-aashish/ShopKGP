@@ -22,6 +22,10 @@ import {
 import Logo from "../../components/Logo";
 import axios from "axios";
 import { Alert, Snackbar } from "@mui/material";
+import FacebookIcon from '@mui/icons-material/Facebook';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import GoogleIcon from '@mui/icons-material/Google';
 
 export default function SignInSide() {
   const navigate = useNavigate();
@@ -211,6 +215,22 @@ export default function SignInSide() {
                 </Link>
               </Grid>
             </Grid>
+
+            <Box sx={{display: 'flex', m: 2, justifyContent: 'center', mt: 7}}>
+              <Avatar sx={{ m: 1, bgcolor: "grey" }}>
+                <GoogleIcon />
+              </Avatar>
+              <Avatar sx={{ m: 1, bgcolor: "grey" }}>
+                <FacebookIcon />
+              </Avatar>
+              <Avatar sx={{ m: 1, bgcolor: "grey" }}>
+                <LinkedInIcon />
+              </Avatar>
+              <Avatar sx={{ m: 1, bgcolor: "grey" }}>
+                <GitHubIcon />
+              </Avatar>
+            </Box>
+
             <Copyright sx={{ mt: 5 }} />
           </Box>
         </Box>

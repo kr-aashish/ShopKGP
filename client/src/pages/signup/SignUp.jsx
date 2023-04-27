@@ -16,6 +16,10 @@ import Logo from "../../components/Logo";
 import axios from "axios";
 import { UserContext } from "../../user_context/Context";
 import { LoginError, LoginSuccess } from "../../user_context/Action";
+import GoogleIcon from "@mui/icons-material/Google";
+import FacebookIcon from "@mui/icons-material/Facebook";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import GitHubIcon from "@mui/icons-material/GitHub";
 
 export function Copyright(props) {
   return (
@@ -83,9 +87,25 @@ export default function SignUp() {
       <CssBaseline />
       <Box mt={10} />
       <Logo />
+
+      <Box sx={{display: 'flex', m: 2, justifyContent: 'center', mt: 3}}>
+        <Avatar sx={{ m: 1, bgcolor: "grey" }}>
+          <GoogleIcon />
+        </Avatar>
+        <Avatar sx={{ m: 1, bgcolor: "grey" }}>
+          <FacebookIcon />
+        </Avatar>
+        <Avatar sx={{ m: 1, bgcolor: "grey" }}>
+          <LinkedInIcon />
+        </Avatar>
+        <Avatar sx={{ m: 1, bgcolor: "grey" }}>
+          <GitHubIcon />
+        </Avatar>
+      </Box>
+
       <Box
         sx={{
-          marginTop: 6,
+          marginTop: 3,
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -197,6 +217,7 @@ export default function SignUp() {
           </Grid>
         </Box>
       </Box>
+
       <Copyright sx={{ mt: 5 }} />
     </Container>
   );
