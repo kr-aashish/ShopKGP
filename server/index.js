@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const auth = require('./auth');
+require("dotenv").config();
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -14,6 +16,7 @@ const db = require('./models');
 
 //Routers
 const productRouter = require('./routes/productRoutes')
+// app.use('/api/product', auth, productRouter);
 app.use('/api/product', productRouter);
 
 const checkoutRouter = require('./routes/checkoutRoutes');
@@ -28,6 +31,17 @@ app.use('/api/order', orderRouter);
 app.use(bodyParser.raw({type: 'application/json'}));
 const webhookRouter = require('./routes/webhookRoutes')
 app.use('/api/webhook', webhookRouter);
+
+app.use('*', (req, res) => {
+    res.status(404).json({
+        success: 'false',
+        message: 'Invalid request',
+        error: {
+            statusCode: 404,
+            message: "You reached a route that is not defined on this server",
+        },
+    });
+});
 
 const { API_PORT } = process.env;
 const port = API_PORT || 3001;
