@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import "./Home.css";
 import Product from "../../components/product/Product";
 import { Grid, CircularProgress } from "@mui/material";
@@ -11,6 +11,7 @@ import axios from 'axios';
 import SearchIcon from "@mui/icons-material/Search";
 import {alpha, styled} from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
+// import { UserContext } from "../../user_context/Context";
 
 const Search = styled("div")(({ theme }) => ({
     display: "flex",
@@ -86,6 +87,9 @@ function Home() {
 
     const [searchTerm, setSearchTerm] = useState("");
     const [filteredProducts, setFilteredProducts] = useState(allProducts);
+
+    // const { state } = useContext(UserContext);
+    // console.log("This is the state", state);
 
     useEffect(() => {
         const fetchData = async () => {
