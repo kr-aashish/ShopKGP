@@ -5,10 +5,22 @@ import {LocationOnTwoTone, Person, Settings, ShoppingCart} from "@mui/icons-mate
 import AccountContent from "./AccountContent";
 import OrderComponent from "./OrderComponent";
 import Typography from "@mui/material/Typography";
+import PrimaryButton from "../../components/buttons/PrimaryButton";
+import {useNavigate} from "react-router-dom";
+import {UserContext} from "../../user_context/Context";
+import {Logout} from "../../user_context/Action";
 
 function AccountNavbar() {
     const [selectedIndex, setSelectedIndex] = useState(1);
     const theme = useTheme();
+    const navigate = useNavigate();
+
+    const { user_dispatch } = React.useContext(UserContext);
+
+    const handleLogout = () => {
+        user_dispatch(Logout());
+        navigate('/');
+    }
 
     const handleListItemClick = (event, index) => {
         setSelectedIndex(index);
@@ -51,6 +63,9 @@ function AccountNavbar() {
                         <ListItemText primary="My Details"/>
                     </ListItemButton>
 
+                    <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
+                        <PrimaryButton text="Logout" onClick={handleLogout}/>
+                    </Box>
 
                     {/*<ListItemButton selected={selectedIndex === 3} onClick={(e) => handleListItemClick(e, 3)}*/}
                     {/*                style={customStyle}>*/}
