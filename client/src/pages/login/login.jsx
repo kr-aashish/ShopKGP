@@ -334,7 +334,7 @@ export default function SignInSide() {
               <LoginSocialInstagram
                   client_id='1676187482836082'
                   client_secret='8ed95b1e49476a13bd13e7c57c65c9b4'
-                  redirect_uri='https://github.com/kr-aashish'
+                  redirect_uri='https://shopkgp.netlify.app/'
                   // onLoginStart={}
                   // onLogoutSuccess={}
                   // onResolve={({ provider, data }: IResolveParams) => {
